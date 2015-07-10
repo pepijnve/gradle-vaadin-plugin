@@ -90,6 +90,8 @@ class GWTConfiguration {
      */
     String[] extraInherits
 
+    File outputDirectory = null
+
     /**
      * @see GWTConfiguration#style
      *
@@ -220,5 +222,9 @@ class GWTConfiguration {
      */
     void logging(boolean logging) {
         this.logging = logging
+    }
+
+    void outputDirectory(File outputDirectory) {
+        this.outputDirectory = outputDirectory;
     }
 }

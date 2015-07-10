@@ -31,12 +31,12 @@ class CompileWidgetsetTask extends DefaultTask {
 
         description = "Compiles Vaadin Addons and components into Javascript."
 
-        File webAppDir = project.convention.getPlugin(WarPluginConvention).webAppDir
+        File outputDirectory = project.vaadin.gwt.outputDirectory ?: project.convention.getPlugin(WarPluginConvention).webAppDir
 
-        File targetDir = new File(webAppDir.canonicalPath + '/VAADIN/widgetsets')
+        File targetDir = new File(outputDirectory.canonicalPath + '/VAADIN/widgetsets')
         getOutputs().dir(targetDir)
 
-        File unitCacheDir = new File(webAppDir.canonicalPath + '/VAADIN/gwt-unitCache')
+        File unitCacheDir = new File(outputDirectory.canonicalPath + '/VAADIN/gwt-unitCache')
         getOutputs().dir(unitCacheDir)
 
         /* Monitor changes in dependencies since upgrading a
@@ -65,13 +65,13 @@ class CompileWidgetsetTask extends DefaultTask {
             return;
         }
 
-        File webAppDir = project.convention.getPlugin(WarPluginConvention).webAppDir
+        File outputDirectory = project.vaadin.gwt.outputDirectory ?: project.convention.getPlugin(WarPluginConvention).webAppDir
 
-        File targetDir = new File(webAppDir.canonicalPath + '/VAADIN/widgetsets')
+        File targetDir = new File(outputDirectory.canonicalPath + '/VAADIN/widgetsets')
         targetDir.mkdirs()
 
         // Ensure unit cache dir is present so the compiler does not complain
-        new File(webAppDir.canonicalPath + '/VAADIN/gwt-unitCache').mkdirs()
+        new File(outputDirectory.canonicalPath + '/VAADIN/gwt-unitCache').mkdirs()
 
         FileCollection classpath = Util.getClassPath(project)
 
